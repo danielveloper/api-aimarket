@@ -1,0 +1,14 @@
+{
+  "ignore": [
+    "build",
+    "node_modules"
+  ],
+  "events": {
+    "restart": "npm run lint"
+  },
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "exec": "ts-node src/index.ts"
+}
