@@ -11,6 +11,7 @@ services:
   #   volumes:
   #     - ./pgdata:/var/lib/postgresql/data
   app:
+    container_name: api-aimarket
     build:
       context: .
       dockerfile: Dockerfile

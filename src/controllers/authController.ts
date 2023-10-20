@@ -4,7 +4,7 @@ import { UserService } from '../services/authService';
 import logger from '../utils/logger';
 import { ResponseUtil } from '../utils/response';
 import { JwtUtil } from '../utils/jwt';
-import { User } from '../entities';
+import { User } from '../entities/user';
 
 export class AuthController {
   static async createUser(req: Request, res: Response) {
@@ -30,7 +30,7 @@ export class AuthController {
       }
 
     } catch (error: unknown) {
-      logger.error(error);
+      // logger.error(error);
       if (error instanceof Error) {
         ResponseUtil.badRequestResponse(
           res, error.message,
