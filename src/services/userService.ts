@@ -1,14 +1,15 @@
 import { validate } from 'class-validator';
 
 import { PersonRequest } from '../models/person';
-import { Person, User } from '../entities';
-import { dataSource } from '../utils/database';
+import { Person } from '../entities/person';
+import { User } from '../entities/user';
+import { AppDataSource } from '../utils/database';
 
 
 export class UserService {
   static async createPerson(personData: PersonRequest) {
 
-    const personRepository = dataSource.getRepository(Person);
+    const personRepository = AppDataSource.getRepository(Person);
 
     const person = new Person();
     person.firstName = personData.firstName;

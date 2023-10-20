@@ -3,17 +3,17 @@ import { validate } from 'class-validator';
 
 import { User } from '../entities/user';
 import { BcryptUtil } from '../utils/bcrypt ';
-import { dataSource } from '../utils/database';
+import { AppDataSource } from '../utils/database';
 
 export class UserService {
 
   static async findUserByEmail(email: string) {
-    const userRepository = dataSource.getRepository(User);
+    const userRepository = AppDataSource.getRepository(User);
     return await userRepository.findOneBy({ email });
   }
 
   static async createUser(userData: { email: string; password: string }) {
-    const userRepository = dataSource.getRepository(User);
+    const userRepository = AppDataSource.getRepository(User);
     const { email, password } = userData;
 
     const existingUser = await UserService.findUserByEmail(email);

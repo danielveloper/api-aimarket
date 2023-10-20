@@ -13,7 +13,7 @@ import { Port } from './config/app.config';
 
 const app: Express = express();
 
-const allowedOrigins = ['http://example.com', 'http://127.0.0.1', 'http://::1'];
+const allowedOrigins = ['http://example.com', 'http://127.0.0.1', 'http://::1', '*'];
 
 const corsOptions = {
   origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {

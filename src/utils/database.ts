@@ -1,15 +1,17 @@
 import { DataSource } from 'typeorm';
 import { DatabaseConfig } from '../config/app.config';
+import { User } from '../entities/user';
+import { Person } from '../entities/person';
 import logger from './logger';
 
-export const dataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: DatabaseConfig.host,
   port: DatabaseConfig.port,
   username: DatabaseConfig.username,
   password: DatabaseConfig.password,
   database: DatabaseConfig.database,
-  entities: ['./src/entities/*.ts'],
+  entities: [User, Person],
   logging: false,
   synchronize: true,
   ssl: true,
@@ -22,7 +24,7 @@ export const dataSource = new DataSource({
 
 async function connect() {
   try {
-    await dataSource.initialize();
+    await AppDataSource.initialize();
     logger.info('DB connected');
   } catch (error) {
     const err: Error = error as Error;
