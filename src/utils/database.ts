@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { DatabaseConfig } from '../config/app.config';
 import { User } from '../entities/user';
 import { Person } from '../entities/person';
+import { Product } from '../entities/product';
 import logger from './logger';
 
 export const AppDataSource = new DataSource({
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
   username: DatabaseConfig.username,
   password: DatabaseConfig.password,
   database: DatabaseConfig.database,
-  entities: [User, Person],
+  entities: [User, Person, Product],
   logging: false,
   synchronize: true,
   ssl: true,
