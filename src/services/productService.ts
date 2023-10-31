@@ -30,4 +30,16 @@ export class ProductService {
     return await productRepository.save(product);
   }
 
+  static async findProductsByCategory(category: string) {
+    const productRepository = AppDataSource.getRepository(Product);
+    return await productRepository.find({ where: { categoria: category } });
+  }
+
+  static async findProductById(id: number) {
+    const productRepository = AppDataSource.getRepository(Product);
+    const product = await productRepository.findOne({ where: { id } });
+
+    return product;
+  }
+
 }

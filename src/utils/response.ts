@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export class ResponseUtil {
   static successResponse(res: any, data: any) {
-    res.status(201).json({
-      status: 201,
+    res.status(200).json({
+      status: 200,
       success: true,
       message: 'Request successful',
       data

@@ -21,8 +21,9 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /home/ubuntu/apps/api-production-ex
+          git pull origin main
           sudo docker compose stop
-          sudo docker compose down --volumes --remove-orphans
+          sudo docker compose down --volumes --remove-orphans --rmi all
           sudo docker compose up -d
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
