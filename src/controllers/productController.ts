@@ -6,6 +6,45 @@ import { ResponseUtil } from '../utils/response';
 
 export class ProductController {
 
+  static async createProduct(req: Request, res: Response) {
+    try {
+      const { nombre, precio, categoria, descripcion, imagen } = req.body;
+
+      if (!nombre || !precio || !categoria || !descripcion || !imagen) {
+        throw new Error('Todos los campos son requeridos para crear un producto.');
+      }
+
+      const productData = {
+        nombre,
+        precio,
+        categoria,
+        descripcion,
+        imagen,
+      };
+
+      const createdProduct = await ProductService.createProduct(productData);
+
+      if (createdProduct instanceof Array && createdProduct.length > 0) {
+        // Si hay errores de validación, responde con un código 400 y los errores.
+        res.status(400).json({ success: false, errors: createdProduct });
+        return;
+      }
+
+      ResponseUtil.successResponse(res, {
+        product: createdProduct,
+      });
+    } catch (error: unknown) {
+      logger.error(error);
+
+      if (error instanceof Error) {
+        res.status(500).json({ success: false, error: error.message });
+      } else {
+        res.status(500).json({ success: false, error: 'An unknown error occurred.' });
+      }
+    }
+  }
+
+
   static async getAllProducts(req: Request, res: Response) {
 
     try {
