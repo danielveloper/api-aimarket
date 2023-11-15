@@ -7,6 +7,22 @@ import { JwtUtil } from '../utils/jwt';
 
 export class UserController {
 
+  static async getUsersWithPersons(req: Request, res: Response) {
+    try {
+      const usersWithPersons = await UserService.getUsersWithPersons();
+      ResponseUtil.successResponse(res, usersWithPersons);
+    } catch (error: unknown) {
+      logger.error(error);
+      if (error instanceof Error) {
+        res.status(500).json({ success: false, error: error.message });
+        return;
+      } else {
+        res.status(500).json({ success: false, error: 'An unknown error occurred.' });
+        return;
+      }
+    }
+  }
+
   static async createPerson(req: Request, res: Response) {
 
     const tokenHeader = req.header('Authorization');

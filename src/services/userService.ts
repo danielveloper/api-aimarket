@@ -5,8 +5,29 @@ import { Person } from '../entities/person';
 import { User } from '../entities/user';
 import { AppDataSource } from '../utils/database';
 
-
 export class UserService {
+
+  static async getUsersWithPersons() {
+    const personRepository = AppDataSource.getRepository(Person);
+    return await personRepository.createQueryBuilder('person')
+        .leftJoinAndSelect('person.user', 'user')
+        .select([
+          'person.id',
+          'person.firstName',
+          'person.secondName',
+          'person.lastName',
+          'person.secondLastName',
+          'person.phoneNumber',
+          'person.street',
+          'user.id',
+          'user.email',
+          'user.active',
+          'user.userType',
+          'user.createdAt'
+        ])
+        .getMany();
+  }
+
   static async createPerson(personData: PersonRequest) {
 
     const personRepository = AppDataSource.getRepository(Person);

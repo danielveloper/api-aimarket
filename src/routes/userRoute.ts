@@ -31,4 +31,6 @@ const userRouter = Router();
  */
 userRouter.post('/create', UserController.createPerson);
 
+userRouter.get('/getUsers', UserController.getUsersWithPersons);
+
 export default userRouter;
